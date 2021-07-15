@@ -2,7 +2,7 @@
   <b-container class="mt-5">
     <nuxt-link to="/">Retour</nuxt-link>
     <h1 class="text-center m-5">Inscription</h1>
-    <Notification :message="error" v-if="error"/>
+    <Notification :message="message" v-if="message"/>
     <b-row>
       <b-col md="10" lg="8" class="mx-auto">
         <b-form>
@@ -55,7 +55,7 @@ export default {
       username: '',
       email: '',
       password: '',
-      error: null
+      message: null
     }
   },
 
@@ -76,7 +76,7 @@ export default {
 
         await this.$router.push('/login')
       } catch (e) {
-        this.error = e.response.data.message
+        this.message = e.response.data.message
       }
     }
   }

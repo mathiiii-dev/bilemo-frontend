@@ -1,7 +1,7 @@
 <template>
-  <div class="notification is-danger">
+  <b-alert show variant="info" dismissible>
     {{ message }}
-  </div>
+  </b-alert>
 </template>
 
 <script>

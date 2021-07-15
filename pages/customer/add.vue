@@ -3,7 +3,7 @@
     <nuxt-link to="/panel">Retour</nuxt-link>
     <b-row>
       <b-col md="8" lg="10" class="mx-auto">
-        <Notification :message="error" v-if="error"/>
+        <Notification :message="message" v-if="message"/>
         <b-form>
           <b-form-group id="input-group-pseudo" label="Pseudo :" label-for="input-pseudo">
             <b-form-input id="input-pseudo" type="text" placeholder="Votre pseudo" required
@@ -25,18 +25,22 @@
 </template>
 
 <script>
+import Notification from "../../components/Notification";
 export default {
+  components: {
+    Notification
+  },
   data() {
     return {
       username: '',
       telephone: '',
       email: '',
-      error: null
+      message: null
     }
   },
 
   methods: {
-    add() {
+    async add() {
       const headers = {
         'Authorization': `Bearer ${sessionStorage.getItem('token')}`
       }
@@ -45,11 +49,19 @@ export default {
         telephone: this.telephone,
         email: this.email,
       }
-      this.$axios.post('customer/add', data, {
-        headers: headers
-      }).then(
-        this.$router.push('/panel')
-      )
+      try {
+        await this.$axios.post('customer/add', data, {
+          headers: headers
+        }).then(
+          e => {
+            console.log(e.data.success)
+            localStorage.setItem('success-message', e.data.success)
+            this.$router.push('/panel')
+          }
+        )
+      } catch (e) {
+        this.message = e.response.data.error.message
+      }
     }
   }
 }

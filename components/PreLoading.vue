@@ -23,7 +23,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .loading-page {
   position: fixed;
   top: 0;

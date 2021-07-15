@@ -1,5 +1,6 @@
 <template>
   <b-container class="mt-5">
+    <Notification :message="message" v-if="message"/>
     <b-row>
       <b-col md="6" class="mx-auto">
         <b-card title="Get Product" class="mt-3">
@@ -56,12 +57,22 @@ export default {
     Notification,
   },
 
+  data() {
+    return {
+      message: null
+    }
+  },
+
   mounted() {
     this.$nextTick(async () => {
       this.$nuxt.$loading.start()
       if (!sessionStorage.getItem('token')) {
         await this.$router.push('/')
       }
+      if (localStorage.getItem('success-message')) {
+        this.message = localStorage.getItem('success-message')
+      }
+      localStorage.removeItem('success-message')
       this.$nuxt.$loading.finish()
     })
   },
@@ -76,7 +87,11 @@ export default {
           headers: {
             'Authorization': `Bearer ${sessionStorage.getItem('token')}`
           }
-        })
+        }).then(
+          e => {
+            this.message = e.data.success
+          }
+        )
       } catch (e) {
         if (e.response.status === 404) {
           await this.$router.push('/error/404')

@@ -2,7 +2,7 @@
   <b-container class="mt-5">
     <nuxt-link to="/">Retour</nuxt-link>
     <h1 class="text-center m-5">Connexion</h1>
-    <Notification :message="error" v-if="error"/>
+    <Notification :message="message" v-if="message"/>
     <b-row>
       <b-col md="10" lg="8" class="mx-auto">
         <b-form>
@@ -53,12 +53,13 @@ export default {
     return {
       username: '',
       password: '',
-      error: null
+      message: null
     }
   },
 
   methods: {
     async login() {
+      this.$root.$loading.start();
       try {
         await this.$axios.post('login_check', {
           username: this.username,
@@ -71,8 +72,9 @@ export default {
           }
         })
       } catch (e) {
-        this.error = e.response.data.message
+        this.message = e.response.data.message
       }
+      this.$nuxt.$loading.finish()
     }
   }
 }
