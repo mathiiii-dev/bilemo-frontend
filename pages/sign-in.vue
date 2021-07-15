@@ -67,6 +67,7 @@ export default {
 
   methods: {
     async register() {
+      this.$root.$loading.start();
       try {
         await this.$axios.post('sign-in', {
           username: this.username,
@@ -78,6 +79,7 @@ export default {
       } catch (e) {
         this.message = e.response.data.message
       }
+      this.$root.$loading.finish();
     }
   }
 }

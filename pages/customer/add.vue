@@ -49,12 +49,12 @@ export default {
         telephone: this.telephone,
         email: this.email,
       }
+      this.$root.$loading.start();
       try {
         await this.$axios.post('customer/add', data, {
           headers: headers
         }).then(
           e => {
-            console.log(e.data.success)
             localStorage.setItem('success-message', e.data.success)
             this.$router.push('/panel')
           }
@@ -62,6 +62,7 @@ export default {
       } catch (e) {
         this.message = e.response.data.error.message
       }
+      this.$root.$loading.finish();
     }
   }
 }

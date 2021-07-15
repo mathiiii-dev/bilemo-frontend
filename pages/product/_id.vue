@@ -1,27 +1,32 @@
 <template>
-  <b-jumbotron :header="product._product" :lead="product.description" class="mx-5 mt-5 py-3">
+  <b-container class="mt-5">
     <nuxt-link to="/panel">Retour</nuxt-link>
-    <b-row>
-      <b-col md="4">
-        <p>Pieces restantes : {{ product.stock }}</p>
-      </b-col>
-      <b-col md="4">
-        <p>Prix : {{ product.price }} €</p>
-      </b-col>
-      <b-col md="4">
-        <p>Couleur : {{ product.color }}</p>
-      </b-col>
-      <b-col md="4">
-        <p>Marque : {{ product.brand }}</p>
-      </b-col>
-      <b-col md="4">
-        <p>Date de sortie : {{ product.release_date }}</p>
-      </b-col>
-      <b-col md="4">
-        <p>Reference : {{ product.reference }}</p>
-      </b-col>
-    </b-row>
-  </b-jumbotron>
+    <h5 class="font-weight-light">{{ product.brand }}</h5>
+    <h1 class="font-bold">{{ product._product }}</h1>
+    <p class="lead">{{ product.description }}</p>
+      <b-row class="text-center mt-5">
+        <b-col md="2">
+          <h4 class="font-bold">Pieces disponible</h4>
+          <p>{{ product.stock }}</p>
+        </b-col>
+        <b-col md="2">
+          <h4 class="font-bold">Prix</h4>
+          <p>{{ product.price }} €</p>
+        </b-col>
+        <b-col md="2">
+          <h4 class="font-bold">Couleur</h4>
+          <p>{{ product.color }}</p>
+        </b-col>
+        <b-col md="2">
+          <h4 class="font-bold">Date de sortie</h4>
+          <p>{{ new Date(product.release_date).toDateString() }}</p>
+        </b-col>
+        <b-col md="2">
+          <h4 class="font-bold">Reference</h4>
+          <p>{{ product.reference }}</p>
+        </b-col>
+      </b-row>
+  </b-container>
 </template>
 
 <script>

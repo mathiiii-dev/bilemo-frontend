@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <Spinner/>
     <b-container class="mt-5">
     <nuxt-link to="/panel">Retour</nuxt-link>
     <b-row>
       <b-col md="10" lg="8" class="mx-auto">
         <b-card :title="product._product" v-for="product of products" v-bind:key="product.id" class="mt-3">
-          <p>{{ product.brand }}</p>
-          <p>{{ product.price }}</p>
-          <p>{{ product.stock }}</p>
-          <nuxt-link :to="{ name: 'product-id', params: { id: product.id }}" variant="primary">Details</nuxt-link>
+          <div class="card-body">
+            <p>Marque : {{ product.brand }}</p>
+            <p>Prix : {{ product.price }} € </p>
+            <p>Pièces disponible : {{ product.stock }}</p>
+          </div>
+          <div class="card-read-more text-right">
+            <nuxt-link :to="{ name: 'product-id', params: { id: product.id }}" variant="primary" class="btn-primary btn mt-3">Details</nuxt-link>
+          </div>
         </b-card>
       </b-col>
     </b-row>
@@ -22,7 +24,6 @@
       </b-col>
     </b-row>
   </b-container>
-  </div>
 </template>
 
 <script>
