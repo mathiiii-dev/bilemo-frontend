@@ -10,7 +10,7 @@
             <p>Pièces disponible : {{ product.stock }}</p>
           </div>
           <div class="card-read-more text-right">
-            <nuxt-link :to="{ name: 'product-id', params: { id: product.id }}" variant="primary" class="btn-primary btn mt-3">Details</nuxt-link>
+            <nuxt-link :to="{ name: 'product-id', params: { id: product.id }}" variant="primary" class="btn-panel text-white btn mt-3">Details</nuxt-link>
           </div>
         </b-card>
       </b-col>
