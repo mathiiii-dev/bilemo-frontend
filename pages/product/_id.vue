@@ -38,31 +38,26 @@ export default {
     }
   },
   mounted() {
-      this.$nextTick( async () => {
-        this.$nuxt.$loading.start()
-        await this.getProducts()
-        this.$nuxt.$loading.finish()
-      })
+    this.$nextTick(async () => {
+      this.$nuxt.$loading.start()
+      await this.getProducts()
+      this.$nuxt.$loading.finish()
+    })
   },
   methods: {
     async getProducts() {
-      try {
-        this.product = await this.$axios.$get(`product/${this.$route.params.id}`, {
-          headers: {
-            'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-          }
-        })
-      } catch (e) {
-        if (e.response.status === 404) {
-          await this.$router.push('/error/404')
-          localStorage.setItem('message-404', e.response.data.error.message)
-        }
-        if (e.response.status === 401) {
-          await this.$router.push('/login')
-        }
-      }
-
+      this.product = await this.$axios.$get(`product/${this.$route.params.id}`)
     }
   }
 }
 </script>
+
+<style>
+.text-purple {
+  color: #563bff;
+}
+
+.text-black-product {
+  color: #2a3156;
+}
+</style>

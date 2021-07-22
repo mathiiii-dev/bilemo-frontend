@@ -96,29 +96,12 @@ export default {
       await this.$router.push(`/${element}/${document.getElementById(`${element}-id`).value}`)
     },
     async deleteCustomer() {
-      try {
-        await this.$axios.delete(`customer/delete/${document.getElementById('customer-id-delete').value}`, {
-          headers: {
-            'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-          }
-        }).then(
-          e => {
-            this.message = e.data.success
-          }
-        )
-      } catch (e) {
-        if (e.response.status === 404) {
-          await this.$router.push('/error/404')
-          localStorage.setItem('message-404', e.response.data.error.message)
+      await this.$axios.delete(`customer/delete/${document.getElementById('customer-id-delete').value}`).then(
+        e => {
+          this.message = e.data.success
+          this.color = 'alert-success'
         }
-        if (e.response.status === 403) {
-          await this.$router.push('/error/403')
-          localStorage.setItem('message-403', e.response.data.error.message)
-        }
-        if (e.response.status === 401) {
-          await this.$router.push('/login')
-        }
-      }
+      )
     },
   }
 }

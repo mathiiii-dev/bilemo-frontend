@@ -32,21 +32,7 @@ export default {
   },
   methods: {
     async getCustomer() {
-      try {
-        this.customer = await this.$axios.$get(`customer/${this.$route.params.id}`, {
-          headers: {
-            'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-          }
-        })
-      } catch (e) {
-        if (e.response.status === 404) {
-          await this.$router.push('/error/404')
-          localStorage.setItem('message-404', e.response.data.error.message)
-        }
-        if (e.response.status === 401) {
-          await this.$router.push('/login')
-        }
-      }
+      this.customer = await this.$axios.$get(`customer/${this.$route.params.id}`)
     }
   }
 }

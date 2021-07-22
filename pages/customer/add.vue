@@ -35,15 +35,14 @@ export default {
       username: '',
       telephone: '',
       email: '',
-      message: null
+      message: null,
+      color: null,
     }
   },
 
   methods: {
-    async add() {
-      const headers = {
-        'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-      }
+    async add(event) {
+      event.preventDefault()
       const data = {
         username: this.username,
         telephone: this.telephone,
@@ -51,15 +50,15 @@ export default {
       }
       this.$root.$loading.start();
       try {
-        await this.$axios.post('customer/add', data, {
-          headers: headers
-        }).then(
+        await this.$axios.post('customer/add', data).then(
           e => {
             localStorage.setItem('success-message', e.data.success)
+            this.color = 'alert-success'
             this.$router.push('/panel')
           }
         )
       } catch (e) {
+        this.color = 'alert-danger'
         this.message = e.response.data.error.message
       }
       this.$root.$loading.finish();

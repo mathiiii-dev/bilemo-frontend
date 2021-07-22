@@ -37,7 +37,7 @@ export default {
   },
 
   mounted() {
-    this.$nextTick( async () => {
+    this.$nextTick(async () => {
       this.$nuxt.$loading.start()
       await this.getProducts()
       this.$nuxt.$loading.finish()
@@ -46,23 +46,7 @@ export default {
 
   methods: {
     async getProducts() {
-      try {
-        this.products = await this.$axios.$get(
-          `products?page=${this.currentPage}`,
-          {
-            headers: {
-              'Authorization': `Bearer ${sessionStorage.getItem('token')}`
-            }
-          })
-      } catch (e) {
-        if (e.response.status === 404) {
-          await this.$router.push('/error/404')
-          localStorage.setItem('message-404', e.response.data.error.message)
-        }
-        if (e.response.status === 401) {
-          await this.$router.push('/login')
-        }
-      }
+      this.products = await this.$axios.$get(`products?page=${this.currentPage}`)
     },
     goNext() {
       this.currentPage++

@@ -77,7 +77,8 @@ export default {
 
         await this.$router.push('/login')
       } catch (e) {
-        this.message = e.response.data.message
+        this.message = e.response.data.error.message
+        console.log(this.message)
       }
       this.$root.$loading.finish();
     }
