@@ -2,8 +2,8 @@
   <b-container class="mt-5">
     <nuxt-link to="/panel">Retour</nuxt-link>
     <b-row>
-      <b-col md="10" lg="8" class="mx-auto">
-        <b-card :title="product._product" v-for="product of products" v-bind:key="product.id" class="mt-3">
+      <b-col md="10" lg="8" class="mx-auto" v-for="product of products" v-bind:key="product.id">
+        <b-card :title="product._product" v-if="product._product" class="mt-3">
           <div class="card-body">
             <p>Marque : {{ product.brand }}</p>
             <p>Prix : {{ product.price }} € </p>
@@ -20,8 +20,8 @@
     <b-row class="text-center my-3">
       <b-col>
         <b-button-group>
-          <b-button v-on:click="goPrevious">‹</b-button>
-          <b-button v-on:click="goNext">›</b-button>
+          <b-button v-on:click="goPrevious" id="previous">‹</b-button>
+          <b-button v-on:click="goNext" id="next">›</b-button>
         </b-button-group>
       </b-col>
     </b-row>
@@ -35,6 +35,7 @@ export default {
     return {
       products: [],
       currentPage: 1,
+      pages: null
     }
   },
 
@@ -42,6 +43,10 @@ export default {
     this.$nextTick(async () => {
       this.$nuxt.$loading.start()
       await this.getProducts()
+      if (this.currentPage === 1) {
+        document.getElementById('previous').disabled = true
+      }
+      this.pages = this.products[ this.products.length - 1]._embedded.pages
       this.$nuxt.$loading.finish()
     })
   },
@@ -52,11 +57,23 @@ export default {
     },
     goNext() {
       this.currentPage++
+      if (this.currentPage > 1) {
+        document.getElementById('previous').disabled = false
+      }
+      if (this.currentPage >= this.pages) {
+        document.getElementById('next').disabled = true
+      }
       this.getProducts()
     },
     goPrevious() {
       this.currentPage--
       this.getProducts()
+      if (this.currentPage === 1) {
+        document.getElementById('previous').disabled = true
+      }
+      if (this.currentPage < this.pages) {
+        document.getElementById('next').disabled = false
+      }
     }
   }
 }
