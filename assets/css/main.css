@@ -1,0 +1,20 @@
+.btn-panel {
+  background-color: #563bff;
+}
+
+body {
+  background-color: #f6f8fa;
+}
+
+.card {
+  display: block;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: none;
+  box-shadow: 0px 0px 28px rgba(0, 0, 0, .08);
+  border-radius: 10px;
+}
+
+.card-read-more {
+  border-top: 1px solid #563bff;
+}

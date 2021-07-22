@@ -4,7 +4,7 @@
     <h1 class="text-center m-5">Connexion</h1>
     <Notification :message="message" v-if="message" :class="color"/>
     <b-row>
-      <b-col md="10" lg="8" class="mx-auto">
+      <b-col md="10" lg="8" class="mx-auto card p-4">
         <b-form>
           <b-form-group id="input-group-pseudo" label="Pseudo :" label-for="input-pseudo">
             <b-form-input id="input-pseudo" type="text" placeholder="Votre pseudo" required
@@ -14,20 +14,10 @@
             <b-form-input id="input-password" type="password" placeholder="********" required
                           v-model="password"></b-form-input>
           </b-form-group>
-          <b-button type="button" variant="primary" class="float-right" @click="login">Je me connecte</b-button>
+          <b-button class="float-right btn-panel btn text-white" v-on:click="login">Je me connecte</b-button>
         </b-form>
       </b-col>
     </b-row>
-    <div style="overflow: hidden;" class="fixed-bottom">
-      <svg
-        preserveAspectRatio="none"
-        viewBox="0 0 1200 120"
-        xmlns="http://www.w3.org/2000/svg"
-        style="fill: #006ccf; width: 112%; height: 500px; transform: rotate(180deg) scaleX(-1);"
-      >
-        <path d="M1200 120L0 16.48V0h1200v120z"/>
-      </svg>
-    </div>
   </b-container>
 </template>
 <script>
