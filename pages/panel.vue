@@ -1,10 +1,10 @@
 <template>
   <b-container class="mt-5">
-    <Notification :message="message" v-if="message"/>
+    <Notification :message="message" v-if="message" :class="color"/>
     <b-row>
       <b-col md="6" class="mx-auto">
         <b-card title="Get Customers" class="mt-3">
-          <b-form-group id="input-group-3" label="Customer id :" label-for="customers-id">
+          <b-form-group id="input-group-3" label="User id :" label-for="customers-id">
             <b-form-input id="customers-id" required></b-form-input>
           </b-form-group>
           <div class="card-read-more mt-3">
@@ -56,7 +56,8 @@
       <b-col md="6">
         <b-card title="Get Products" class="mt-3">
           <div class="card-read-more mt-3">
-            <nuxt-link to="/products" variant="primary" class="btn mt-3 text-white btn-panel">Voir les produits</nuxt-link>
+            <nuxt-link to="/products" variant="primary" class="btn mt-3 text-white btn-panel">Voir les produits
+            </nuxt-link>
           </div>
         </b-card>
       </b-col>
@@ -73,7 +74,8 @@ export default {
 
   data() {
     return {
-      message: null
+      message: null,
+      color: null,
     }
   },
 
@@ -85,6 +87,7 @@ export default {
       }
       if (localStorage.getItem('success-message')) {
         this.message = localStorage.getItem('success-message')
+        this.color = 'alert-success'
       }
       localStorage.removeItem('success-message')
       this.$nuxt.$loading.finish()
@@ -109,64 +112,24 @@ export default {
 
 <style>
 .btn-panel {
-  background-color: #2D3436;
+  background-color: #563bff;
 }
+
 body {
-  background-color: #E6E6E6;
+  background-color: #f6f8fa;
 }
 
 .card {
   display: block;
   margin-bottom: 20px;
-  line-height: 1.42857143;
-  background-color: #FFFFFF;
-  border-radius: 2px;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  transition: box-shadow .25s;
-}
-
-.card:hover {
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.img-card {
-  width: 100%;
-  height: 200px;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
-  display: block;
-  overflow: hidden;
-}
-
-.img-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  transition: all .25s ease;
-}
-
-.card-content {
-  padding: 15px;
-  text-align: left;
-}
-
-.card-title {
-  margin-top: 0px;
-  font-weight: 700;
-  font-size: 1.65em;
-}
-
-.card-title a {
-  color: #000;
-  text-decoration: none !important;
+  background-color: #ffffff;
+  border: none;
+  box-shadow: 0px 0px 28px rgba(0, 0, 0, .08);
+  border-radius: 10px;
 }
 
 .card-read-more {
-  border-top: 1px solid #636E72;
+  border-top: 1px solid #563bff;
 }
 
-.card-read-more a {
-  text-decoration: none !important;
-  padding: 10px;
-}
 </style>

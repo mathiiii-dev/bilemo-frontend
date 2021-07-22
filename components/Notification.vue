@@ -1,5 +1,5 @@
 <template>
-  <b-alert show variant="info" dismissible>
+  <b-alert show dismissible :class="color">
     {{ message }}
   </b-alert>
 </template>
@@ -7,6 +7,6 @@
 <script>
 export default {
   name: 'Notification',
-  props: ['message']
+  props: ['message', 'color']
 }
 </script>

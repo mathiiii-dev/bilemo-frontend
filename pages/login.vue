@@ -2,7 +2,7 @@
   <b-container class="mt-5">
     <nuxt-link to="/">Retour</nuxt-link>
     <h1 class="text-center m-5">Connexion</h1>
-    <Notification :message="message" v-if="message"/>
+    <Notification :message="message" v-if="message" :class="color"/>
     <b-row>
       <b-col md="10" lg="8" class="mx-auto">
         <b-form>
@@ -53,7 +53,8 @@ export default {
     return {
       username: '',
       password: '',
-      message: null
+      message: null,
+      color: 'alert-danger'
     }
   },
 

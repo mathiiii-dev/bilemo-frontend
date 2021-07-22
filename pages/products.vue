@@ -1,5 +1,5 @@
 <template>
-    <b-container class="mt-5">
+  <b-container class="mt-5">
     <nuxt-link to="/panel">Retour</nuxt-link>
     <b-row>
       <b-col md="10" lg="8" class="mx-auto">
@@ -10,7 +10,9 @@
             <p>Pièces disponible : {{ product.stock }}</p>
           </div>
           <div class="card-read-more text-right">
-            <nuxt-link :to="{ name: 'product-id', params: { id: product.id }}" variant="primary" class="btn-panel text-white btn mt-3">Details</nuxt-link>
+            <nuxt-link :to="{ name: 'product-id', params: { id: product.id }}" variant="primary"
+                       class="btn-panel text-white btn mt-3">Details
+            </nuxt-link>
           </div>
         </b-card>
       </b-col>

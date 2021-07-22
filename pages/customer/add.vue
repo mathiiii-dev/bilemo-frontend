@@ -1,9 +1,9 @@
 <template>
   <b-container class="mt-5">
     <nuxt-link to="/panel">Retour</nuxt-link>
-    <b-row>
+    <b-row class="card py-5">
       <b-col md="8" lg="10" class="mx-auto">
-        <Notification :message="message" v-if="message"/>
+        <Notification :message="message" v-if="message" :class="color"/>
         <b-form>
           <b-form-group id="input-group-pseudo" label="Pseudo :" label-for="input-pseudo">
             <b-form-input id="input-pseudo" type="text" placeholder="Votre pseudo" required
@@ -17,7 +17,7 @@
             <b-form-input id="input-email" type="email" placeholder="mail@mail.com" required
                           v-model="email"></b-form-input>
           </b-form-group>
-          <b-button type="button" variant="primary" class="float-right" @click="add">Ajouter un customer</b-button>
+          <button class="btn btn-panel text-white mt-3" v-on:click="add">Ajouter un customer</button>
         </b-form>
       </b-col>
     </b-row>
@@ -26,6 +26,7 @@
 
 <script>
 import Notification from "../../components/Notification";
+
 export default {
   components: {
     Notification
