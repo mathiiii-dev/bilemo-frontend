@@ -56,9 +56,12 @@ export default {
           username: this.username,
           password: this.password
         }).then(response => {
+          console.log(response)
           const token = response.data.token
-          if (response.data.token) {
+          const refreshToken = response.data.refresh_token
+          if (token && refreshToken) {
             sessionStorage.setItem('token', token)
+            sessionStorage.setItem('refresh_token', refreshToken)
             this.$router.push('/panel')
           }
         })

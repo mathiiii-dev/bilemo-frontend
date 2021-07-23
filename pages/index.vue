@@ -7,7 +7,7 @@
           <b-card-text>
             Accès aux produits et utilisateurs, ainsi que la gestion des utilisateurs
           </b-card-text>
-          <nuxt-link to="/login" class="btn btn-primary">Se connecter</nuxt-link>
+          <nuxt-link to="/login" class="btn btn-panel text-white">Se connecter</nuxt-link>
         </b-card>
       </b-col>
       <b-col md="6" class="mt-5">
@@ -15,7 +15,7 @@
           <b-card-text>
             Inscription nécesaire pour acceder aux produits et aux utilisateurs
           </b-card-text>
-          <nuxt-link to="/sign-in" class="btn btn-primary">S'inscrire</nuxt-link>
+          <nuxt-link to="/sign-in" class="btn btn-panel text-white">S'inscrire</nuxt-link>
         </b-card>
       </b-col>
     </b-row>

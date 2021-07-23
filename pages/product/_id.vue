@@ -5,7 +5,7 @@
     <h5 class="font-weight-light text-purple">{{ product.brand }}</h5>
       <h1 class="font-bold text-black-product">{{ product._product }}</h1>
       <p class="lead">{{ product.description }}</p>
-      <b-row class="text-center mt-5">
+      <b-row class="mx-auto text-center mt-5 border-success">
         <b-col md="2">
           <h4 class="font-bold text-black-product">Pieces disponible</h4>
           <p>{{ product.stock }}</p>
@@ -18,7 +18,7 @@
           <h4 class="font-bold text-black-product">Couleur</h4>
           <p>{{ product.color }}</p>
         </b-col>
-        <b-col md="2">
+        <b-col md="4">
           <h4 class="font-bold text-black-product">Date de sortie</h4>
           <p>{{ new Date(product.release_date).toDateString() }}</p>
         </b-col>
