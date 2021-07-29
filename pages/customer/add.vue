@@ -60,7 +60,7 @@ export default {
         )
       } catch (e) {
         this.color = 'alert-danger'
-        this.message = e.response.data.error.message
+        this.message = e.response.data.error_description
       }
       this.$root.$loading.finish();
     }
