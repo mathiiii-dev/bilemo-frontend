@@ -49,7 +49,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'https://localhost:8000/api'
+    baseURL: process.env.BASE_URL
   },
 
   loading: "~/components/PreLoading.vue"
