@@ -51,7 +51,7 @@ export default {
       }
       this.$root.$loading.start();
       try {
-        await this.$axios.post('customer/add', data).then(
+        await this.$axios.post('customers/add', data).then(
           e => {
             localStorage.setItem('success-message', e.data.success)
             this.color = 'alert-success'

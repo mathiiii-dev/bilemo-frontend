@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     async getProducts() {
-      this.product = await this.$axios.$get(`product/${this.$route.params.id}`)
+      this.product = await this.$axios.$get(`products/${this.$route.params.id}`)
     }
   }
 }

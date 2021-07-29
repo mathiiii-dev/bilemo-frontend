@@ -99,9 +99,9 @@ export default {
       await this.$router.push(`/${element}/${document.getElementById(`${element}-id`).value}`)
     },
     async deleteCustomer() {
-      await this.$axios.delete(`customer/delete/${document.getElementById('customer-id-delete').value}`).then(
+      await this.$axios.delete(`customers/delete/${document.getElementById('customer-id-delete').value}`).then(
         e => {
-          this.message = e.data.success
+          this.message = 'The customer has been deleted'
           this.color = 'alert-success'
         }
       )

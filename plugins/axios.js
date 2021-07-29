@@ -42,27 +42,13 @@ export default function ({$axios, redirect}) {
   $axios.onError(error => {
     const code = parseInt(error.response && error.response.status)
 
-    if (code === 401) {
-      const refreshToken = sessionStorage.getItem('refresh_token')
-
-      if (refreshToken) {
-        const newToken = $axios.post('token/refresh', {
-          refresh_token: refreshToken
-        })
-        console.log(newToken, 'oui')
-        sessionStorage.setItem('token', newToken)
-      }
-      sessionStorage.removeItem('token')
-      return redirect('/')
-    }
-
     if (code === 404) {
-      localStorage.setItem('message-404', error.response.data.error.message)
+      localStorage.setItem('message-404', error.response.data.error_description)
       return redirect('/error/404')
     }
 
     if (code === 403) {
-      localStorage.setItem('message-403', error.response.data.error.message)
+      localStorage.setItem('message-403', error.response.data.error_description)
       return redirect('/error/403')
     }
   })

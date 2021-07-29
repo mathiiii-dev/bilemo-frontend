@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     async getCustomer() {
-      this.customer = await this.$axios.$get(`customer/${this.$route.params.id}`)
+      this.customer = await this.$axios.$get(`customers/${this.$route.params.id}`)
     }
   }
 }
