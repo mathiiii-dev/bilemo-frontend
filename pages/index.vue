@@ -4,6 +4,7 @@
     <b-row>
       <b-col md="6" class="mt-5">
         <b-card title="Connexion" class="text-center">
+          <Notification :message="message" v-if="message" :class="color"/>
           <b-card-text>
             Accès aux produits et utilisateurs, ainsi que la gestion des utilisateurs
           </b-card-text>
@@ -32,5 +33,17 @@
 </template>
 
 <script>
-export default {}
+import Notification from "../components/Notification";
+
+export default {
+  components: {
+    Notification
+  },
+  data() {
+    return {
+      color: 'alert-danger',
+      message: null
+    }
+  },
+}
 </script>

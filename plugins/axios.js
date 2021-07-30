@@ -1,3 +1,5 @@
+import {localStorage} from "@nuxtjs/auth/lib/module/defaults";
+
 export default function ({$axios, redirect}) {
 
   $axios.onRequest(request => {
@@ -11,7 +13,7 @@ export default function ({$axios, redirect}) {
     const code = parseInt(err.response && err.response.status);
 
     let originalRequest = err.config;
-    if (code === 401) {
+    if (code === 401 && err.response.data.message !== 'Invalid credentials.') {
       originalRequest.__isRetryRequest = true;
 
       let token = sessionStorage.getItem('refresh_token');
@@ -36,6 +38,9 @@ export default function ({$axios, redirect}) {
         }).catch(e => {
           return redirect('/login');
         });
+    } else if (code === 401) {
+      console.log('Invalid credentials.')
+      //TODO: Handle invalid credentials error.
     }
   });
 
@@ -51,5 +56,6 @@ export default function ({$axios, redirect}) {
       localStorage.setItem('message-403', error.response.data.error_description)
       return redirect('/error/403')
     }
+
   })
 }

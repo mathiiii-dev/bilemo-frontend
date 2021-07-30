@@ -17,7 +17,7 @@
             <b-form-input id="input-email" type="email" placeholder="mail@mail.com" required
                           v-model="email"></b-form-input>
           </b-form-group>
-          <button class="btn btn-panel text-white mt-3" v-on:click="add">Ajouter un customer</button>
+          <button class="btn btn-panel text-white mt-3" @click="add">Ajouter un customer</button>
         </b-form>
       </b-col>
     </b-row>
