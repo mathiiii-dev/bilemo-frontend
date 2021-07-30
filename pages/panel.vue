@@ -100,7 +100,7 @@ export default {
 
   methods: {
     async getCustomers() {
-      await this.$router.push(`customers/${this.clientId}`)
+      await this.$router.push(`customers/${this.clientId}`).then()
     },
     async getCustomer() {
       await this.$router.push(`customer/${this.customerId}`)

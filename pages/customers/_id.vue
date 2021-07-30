@@ -31,7 +31,15 @@ export default {
   mounted() {
     this.$nextTick(async () => {
       this.$nuxt.$loading.start()
-      await this.getCustomers()
+      try {
+        await this.getCustomers()
+      }
+      catch (e) {
+        if(e.response.status === 500) {
+          localStorage.setItem('message-500', e.response.data.error_description)
+          await this.$router.push('/error/500')
+        }
+      }
       this.pages = this.customers[ this.customers.length - 1]._embedded.pages
       this.$nuxt.$loading.finish()
     })
