@@ -5,6 +5,7 @@
     <b-row>
       <b-col md="10" lg="8" class="mx-auto card p-4">
         <b-form>
+          <Notification :message="message" v-if="message" :class="color"/>
           <b-form-group id="input-group-pseudo" label="Pseudo :" label-for="input-pseudo">
             <b-form-input id="input-pseudo" type="text" placeholder="Votre pseudo" required
                           v-model="username"></b-form-input>
@@ -20,7 +21,13 @@
   </b-container>
 </template>
 <script>
+import Notification from "../components/Notification";
 export default {
+
+  components: {
+    Notification,
+  },
+
   mounted() {
     this.$nextTick(async () => {
       this.$nuxt.$loading.start()
@@ -36,6 +43,7 @@ export default {
     return {
       username: '',
       password: '',
+      message: null,
       color: 'alert-danger'
     }
   },
@@ -43,19 +51,26 @@ export default {
   methods: {
     async login() {
       this.$root.$loading.start();
-      await this.$axios.post('login_check', {
-        username: this.username,
-        password: this.password
-      }).then(response => {
-        console.log(response)
-        const token = response.data.token
-        const refreshToken = response.data.refresh_token
-        if (token && refreshToken) {
-          sessionStorage.setItem('token', token)
-          sessionStorage.setItem('refresh_token', refreshToken)
-          this.$router.push('/panel')
+      try {
+        await this.$axios.post('login_check', {
+          username: this.username,
+          password: this.password
+        }).then(response => {
+          console.log(response)
+          const token = response.data.token
+          const refreshToken = response.data.refresh_token
+          if (token && refreshToken) {
+            sessionStorage.setItem('token', token)
+            sessionStorage.setItem('refresh_token', refreshToken)
+            this.$router.push('/panel')
+          }
+        })
+      } catch (e) {
+        if (e.response.status === 401) {
+          this.message = e.response.data.message
         }
-      })
+      }
+
       this.$nuxt.$loading.finish()
     }
   }
