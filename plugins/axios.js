@@ -1,5 +1,3 @@
-import {localStorage} from "@nuxtjs/auth/lib/module/defaults";
-
 export default function ({$axios, redirect}) {
 
   $axios.onRequest(request => {
