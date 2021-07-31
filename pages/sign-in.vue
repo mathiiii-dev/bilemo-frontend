@@ -4,7 +4,7 @@
     <h1 class="text-center m-5">Inscription</h1>
     <b-row class="">
       <b-col md="10" lg="8" class="mx-auto card p-4">
-        <b-form>
+        <b-form @submit.prevent="register">
           <Notification :message="message" v-if="message" :class="color"/>
           <b-form-group id="input-group-pseudo" label="Pseudo :" label-for="input-pseudo">
             <b-form-input id="input-pseudo" type="text" placeholder="Votre pseudo" required
@@ -18,7 +18,7 @@
             <b-form-input id="input-email" type="email" placeholder="username@mail.com" required
                           v-model="email"></b-form-input>
           </b-form-group>
-          <button class="btn btn-panel text-white mt-3 float-right" @click="register">Je me connecte</button>
+          <button class="btn btn-panel text-white mt-3 float-right" type="submit">Je me connecte</button>
         </b-form>
       </b-col>
     </b-row>
@@ -54,16 +54,15 @@ export default {
       try {
         await this.$axios.post('sign-in', {
           username: this.username,
+          password: this.password,
           email: this.email,
-          password: this.password
+        }).then(() => {
+          this.$router.push('/login')
         })
-
-        await this.$router.push('/login')
       } catch (e) {
         this.message = e.response.data.error_description
-        console.log(this.message)
       }
-      this.$root.$loading.finish();
+      this.$nuxt.$loading.finish()
     }
   }
 }
